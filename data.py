@@ -28,5 +28,18 @@ train["Cabin_Letter"] = cabin_letter
 for i in range(1, len(train["Cabin_Letter"].value_counts())):
     train["Cabin_" + train["Cabin_Letter"].value_counts().index[i]] = (train["Cabin_Letter"] == train["Cabin_Letter"].value_counts().index[i]).astype(int)
 
-print(train)
+train.drop("Cabin_Letter", axis=1)
+train.drop("Cabin", axis=1)
+age_median = train["Age"].describe()["50%"]
+for i in range(len(train)):
+    if math.isnan(train.iloc[i]["Age"]):
+        train.at[i, "Age"] = age_median
 
+train["Sex"] = (train["Sex"] == "male").astype(int)
+
+ticket_f = []
+
+for i in range(len(train)):
+    ticket_f.append(train.at[i, "Ticket"].split(" ")[0]) #fix
+
+print(ticket_f)
