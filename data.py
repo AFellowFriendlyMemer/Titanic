@@ -25,5 +25,8 @@ for i in range(len(train)):
 
 train["Cabin_Letter"] = cabin_letter
 
-for i in range(train["Cabin_Letter"].value_counts()):
+for i in range(1, len(train["Cabin_Letter"].value_counts())):
+    train["Cabin_" + train["Cabin_Letter"].value_counts().index[i]] = (train["Cabin_Letter"] == train["Cabin_Letter"].value_counts().index[i]).astype(int)
+
+print(train)
 
