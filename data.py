@@ -5,7 +5,7 @@ import math
 
 import sklearn
 
-def dataManaging(train):
+def dataManaging(train, isTest):
 
     cabin_num = []
 
@@ -83,8 +83,13 @@ def dataManaging(train):
     for i in range(len(train)):
         train.at[i, "Age"] /= r
 
+    if (not isTest):
+        a = train["Survived"].copy()
+        train = train.drop("Survived", axis=1)
+        return train, a
+    else:
+        return train
+
+
     
-    a = train["Survived"].copy()
-    train = train.drop("Survived", axis=1)
-    return train, a
     
