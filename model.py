@@ -35,7 +35,8 @@ class network(nn.Module):
             nn.Linear(76, 40),
             nn.ReLU(),
             nn.Linear(40, 2),
-            nn.Sigmoid()
+            nn.Sigmoid(),
+            nn.Softmax(dim=1)
         )
         self.double()
     def forward(self, x):
@@ -61,7 +62,7 @@ loss_fn = nn.CrossEntropyLoss()
 
 optimizer = torch.optim.Adam(model.parameters(), lr = 0.001)
 
-
+# print(x_train[0])
 
 def trainEpoch():
 
@@ -70,6 +71,7 @@ def trainEpoch():
     prev_param = list(model.parameters())
     for i, data in enumerate(train_dataloader):
         inputs, labels = data
+        # print(labels)
         inputs.requires_grad_()
         optimizer.zero_grad()
 

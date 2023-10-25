@@ -10,7 +10,7 @@ def splitData():
 
     d = pd.read_csv(os.path.join("train.csv"))
 
-    x_data, y_data = dataManaging(d)
+    x_data, y_data = dataManaging(d, False)
 
     x_train, x_test, y_train, y_test = train_test_split(x_data, y_data, test_size=0.2, random_state=5)
 
